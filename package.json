@@ -2,16 +2,10 @@
   "name": "bun-native-typescript",
   "version": "1.0.0",
   "private": true,
-  "type": "module",
   "scripts": {
-    "clean": "rm -rf dist",
-    "prebuild": "npm run clean",
+    "dev": "bun run --hot src/index.ts",
     "build": "bun build ./src/index.ts --outdir ./dist --target bun",
-    "dev": "bun run --watch src/index.ts",
-    "lint": "eslint . --ext .ts",
-    "check-types": "tsc --noEmit",
-    "prestart": "npm run build",
-    "start": "bun run dist/index.js"
+    "start": "bun run ./dist/index.js"
   },
   "dependencies": {
     "@logtail/node": "^0.5.2",

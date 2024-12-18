@@ -68,12 +68,12 @@ const Register = async (
         }
         Logger.info('Send email successfully');
       });
-      res.writeHead(201, { 'Content-Type': 'application/json' });
+      // res.writeHead(201, { 'Content-Type': 'application/json' });
       BaseResponse(res, 'User created', 'success', { msg: 'hello' });
       // res.end(JSON.stringify(user));
     } catch (error) {
       Logger.error('Error:', error);
-      res.writeHead(400, { 'Content-Type': 'application/json' });
+      // res.writeHead(400, { 'Content-Type': 'application/json' });
       BaseResponse(res, (error as Error).message, 'badRequest', null);
       // res.end(JSON.stringify({ error: (error as Error).message }));
     }
@@ -125,12 +125,10 @@ const Login = async (
         BaseResponse(res, 'Login success', 'success', result);
       } catch (error) {
         Logger.error('Error:', error);
-        res.writeHead(400, { 'Content-Type': 'application/json' });
         BaseResponse(res, (error as Error).message, 'badRequest', null);
       }
     });
   } catch (error) {
-    res.writeHead(400, { 'Content-Type': 'application/json' });
     BaseResponse(res, (error as Error).message, 'badRequest', null);
   }
 };
@@ -151,7 +149,6 @@ const Protect = (req: IncomingMessage, res: ServerResponse): void => {
     // res.end('Protected route accessed!');
   } catch (error) {
     Logger.error('Error:', error);
-    res.writeHead(400, { 'Content-Type': 'application/json' });
     BaseResponse(res, (error as Error).message, 'badRequest', null);
   }
 };

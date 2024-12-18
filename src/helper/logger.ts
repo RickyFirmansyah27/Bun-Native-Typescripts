@@ -12,7 +12,7 @@ config({ path: envPath });
 const LOGTAIL_API_KEY = process.env.LOGTAIL_API_KEY as string;
 const logtail = new Logtail(LOGTAIL_API_KEY);
 
-const { combine, timestamp, printf, colorize } = format;
+const { combine, timestamp, printf } = format;
 
 const loggerFormat = printf(({ level, message, timestamp }) => {
   return `${timestamp} [${level}]: ${message}`;
@@ -21,7 +21,6 @@ const loggerFormat = printf(({ level, message, timestamp }) => {
 export const Logger = createLogger({
   level: 'debug',
   format: combine(
-    colorize(),
     timestamp({ format: () => moment().format('ddd, DD MMM YYYY HH:mm:ss') }),
     loggerFormat
   ),
