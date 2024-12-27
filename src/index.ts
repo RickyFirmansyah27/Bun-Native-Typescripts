@@ -25,7 +25,7 @@ const routeHandlers = (req: IncomingMessage, res: ServerResponse) => {
 const handler = createMiddlewareHandler(HttpLogger, routeHandlers);
 
 const server = createServer(handler);
-server.listen(port, async () => {
+server.listen(port, '0.0.0.0', async () => {
   try {
     await DBConnection();
     await rabbitMqConnection();
