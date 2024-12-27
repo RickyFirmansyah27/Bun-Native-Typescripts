@@ -2,24 +2,28 @@
 FROM oven/bun:1 AS builder
 WORKDIR /app
 
-# Copy seluruh proyek termasuk semua packages dan apps
-COPY . .
+# Salin file penting
+COPY package.json bun.lockb ./
+COPY src ./src
+COPY tsconfig.json ./
 
 # Install dependencies
-RUN bun install
+RUN bun install --no-cache
 
-# Build semua packages (misalnya `bun build` digunakan untuk membuild package)
-RUN cd apps/auth-service && bun run build
+# Build aplikasi
+RUN bun build ./src/index.ts
 
 # Stage 2: Runner (Production)
 FROM oven/bun:1-slim AS runner
 WORKDIR /app
 
-# Copy hasil build dari packages dan auth-service
-COPY --from=builder /app/apps/auth-service/dist ./apps/auth-service/dist
-COPY --from=builder /app/apps/auth-service/package.json ./apps/auth-service/
+# Salin hasil build dari stage builder
+COPY --from=builder /app/src ./src
+COPY package.json ./ 
 
 # Set up environment
 ENV PORT=8101
 EXPOSE 8101
-CMD ["bun", "apps/auth-service/dist/index.js"]
+
+# Jalankan aplikasi
+CMD ["bun", "run", "src/index.js"]
