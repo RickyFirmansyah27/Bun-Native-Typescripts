@@ -11,7 +11,7 @@ COPY tsconfig.json ./
 RUN bun install --no-cache
 
 # Build aplikasi
-RUN bun build ./src/index.ts
+RUN bun build ./src/index.ts --target=node
 
 # Stage 2: Runner (Production)
 FROM oven/bun:1-slim AS runner
