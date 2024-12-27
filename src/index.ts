@@ -6,7 +6,7 @@ import routes from './routes';
 import createMiddlewareHandler from './middlewares';
 import { BaseResponse, HttpLogger, Logger } from './helper';
 
-const port = 8101;
+const port = 8100;
 
 const routeHandlers = (req: IncomingMessage, res: ServerResponse) => {
   const method = req.method!;

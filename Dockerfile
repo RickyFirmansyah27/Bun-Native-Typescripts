@@ -22,8 +22,8 @@ COPY --from=builder /app/dist ./dist
 COPY package.json ./    
 
 # Set up environment
-ENV PORT=8101
-EXPOSE 8101
+ENV PORT=8100
+EXPOSE 8100
 
 # Jalankan aplikasi
 CMD ["bun", "dist/index.js"]
